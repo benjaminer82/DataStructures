@@ -22,6 +22,9 @@ private:
 	bool useBinarySearchTree() { return treeSelection == 2; }
 	void setUseBinaryTree() { treeSelection = 1; }
 	void setUseBinarySearchTree() { treeSelection = 2; }
+	void printTreeBreadthFirst();
+	void printTreeDepthFirst();
+	void insertNodeToTree(int value);
 
 	int ConvertToInt(const std::string str);
 

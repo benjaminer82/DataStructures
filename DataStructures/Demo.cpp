@@ -91,31 +91,46 @@ void CDemo::treeSection()
 			return;
 		else if (userInput.compare("b") == 0)
 		{
-			if (binaryTree)
-				cout << binaryTree->ToString(1) << endl;
-			else
-				treeMenu();
+			printTreeBreadthFirst();
 		}
 		else if (userInput.compare("d") == 0)
 		{
-			if (binaryTree)
-				cout << binaryTree->ToString(2) << endl;
-			else
-				treeMenu();
+			printTreeDepthFirst();
 		}
 		else
 		{
 			int value = ConvertToInt(userInput);
-			if (binaryTree)
-				binaryTree->InsertNode(value);
-			else
-			{
-				if (useBinaryTree())
-					binaryTree = new CBinaryTree<int>(value);
-				else
-					binaryTree = new BinarySearchTree<int>(value);
-			}
+			insertNodeToTree(value);
 		}
+	}
+}
+
+void CDemo::printTreeBreadthFirst()
+{
+	if (binaryTree)
+		cout << binaryTree->ToString(1) << endl;
+	else
+		treeMenu();
+}
+
+void CDemo::printTreeDepthFirst()
+{
+	if (binaryTree)
+		cout << binaryTree->ToString(2) << endl;
+	else
+		treeMenu();
+}
+
+void CDemo::insertNodeToTree(int value)
+{	
+	if (binaryTree)
+		binaryTree->InsertNode(value);
+	else
+	{
+		if (useBinaryTree())
+			binaryTree = new CBinaryTree<int>(value);
+		else
+			binaryTree = new BinarySearchTree<int>(value);
 	}
 }
 
