@@ -13,11 +13,20 @@ public:
 
 private:
 	void mainMenu();
-	void treeSection(int iOpt);// iOpt = 1 binary tree; iOpt = 2 binary search tree.
-	void treeMenu(int iOpt);// iOpt = 1 binary tree; iOpt = 2 binary search tree.
+	void binaryTreeSection();
+	void binarySearchTreeSection();
+	void validateTree();
+	void treeSection();
+	void treeMenu();
+	bool useBinaryTree() { return treeSelection == 1; }
+	bool useBinarySearchTree() { return treeSelection == 2; }
+	void setUseBinaryTree() { treeSelection = 1; }
+	void setUseBinarySearchTree() { treeSelection = 2; }
 
 	int ConvertToInt(const std::string str);
 
 	CBinaryTree<int> * binaryTree;
+
+	int treeSelection;
 };
 

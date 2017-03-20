@@ -8,6 +8,7 @@ using namespace std;
 
 CDemo::CDemo()
 {
+	treeSelection = 1;
 }
 
 
@@ -26,9 +27,9 @@ void CDemo::Init()
 		if (userInput.compare("exit") == 0)
 			return;
 		else if (userInput.compare("1") == 0)
-			treeSection(1);
+			binaryTreeSection();
 		else if (userInput.compare("2") == 0)
-			treeSection(2);
+			binarySearchTreeSection();
 		
 		mainMenu();
 	}
@@ -41,9 +42,30 @@ void CDemo::mainMenu() {
 	cout << "press exit to exit" << endl;
 }
 
-void CDemo::treeMenu(int iOpt)
+void CDemo::binaryTreeSection()
 {
-	if(iOpt == 1)
+	setUseBinaryTree();
+	treeSection();
+}
+
+void CDemo::binarySearchTreeSection()
+{
+	setUseBinarySearchTree();
+	treeSection();
+}
+
+void CDemo::validateTree()
+{
+	if (binaryTree)
+	{
+		binaryTree->~CBinaryTree();
+		binaryTree = nullptr;
+	}
+}
+
+void CDemo::treeMenu()
+{
+	if(useBinaryTree())
 		cout << "please enter numbers for the new binary tree" << endl;
 	else
 		cout << "please enter numbers for the new binary search tree" << endl;
@@ -58,15 +80,10 @@ int CDemo::ConvertToInt(const std::string str)
 	return 0;
 }
 
-void CDemo::treeSection(int iOpt)
+void CDemo::treeSection()
 {
-	if (binaryTree)
-	{
-		binaryTree->~CBinaryTree();
-		binaryTree = nullptr;
-	}
-
-	treeMenu(iOpt);
+	validateTree();
+	treeMenu();
 	string userInput;
 	while (getline(cin, userInput))
 	{
@@ -77,14 +94,14 @@ void CDemo::treeSection(int iOpt)
 			if (binaryTree)
 				cout << binaryTree->ToString(1) << endl;
 			else
-				treeMenu(iOpt);
+				treeMenu();
 		}
 		else if (userInput.compare("d") == 0)
 		{
 			if (binaryTree)
 				cout << binaryTree->ToString(2) << endl;
 			else
-				treeMenu(iOpt);
+				treeMenu();
 		}
 		else
 		{
@@ -93,7 +110,7 @@ void CDemo::treeSection(int iOpt)
 				binaryTree->InsertNode(value);
 			else
 			{
-				if (iOpt == 1)
+				if (useBinaryTree())
 					binaryTree = new CBinaryTree<int>(value);
 				else
 					binaryTree = new BinarySearchTree<int>(value);
